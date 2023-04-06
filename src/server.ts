@@ -9,7 +9,10 @@ const PORT = process.env.PORT || 5173
 
 
 
-
+app.get('/', (req, res) =>{
+    res.status(200).send("Thank you for asking for the manga")
+    console.log(req.url , req.method)
+})
 
 
 
