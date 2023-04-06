@@ -1,31 +1,30 @@
-import Express from 'express'
-import dotenv from 'dotenv'
+import Express from "express";
+import dotenv from "dotenv";
 
-dotenv.config()
+import { MangaRoute } from "./routes/manga";
+import { RootRoute } from "./routes/root";
 
-const app = Express()
-const PORT = process.env.PORT || 5173
+dotenv.config();
 
-
-
-
-app.get('/', (req, res) =>{
-    res.status(200).send("Thank you for asking for the manga")
-    console.log(req.url , req.method)
-})
+const app = Express();
+const PORT = process.env.PORT || 5173;
 
 
+//////////////////////////////MIDDLEWARE
 
+// built-in middleware to handle urlencoded form data
+app.use(Express.urlencoded({ extended: false }));
 
+// built-in middleware for json
+app.use(Express.json());
 
-
-
-
-
-
+////////////////////////////////ROUTES
+app.get("/", RootRoute);
+app.use("/manga", MangaRoute);
 
 
 
-app.listen(PORT ,  () => {
-  console.log(`Server running on Port:${PORT}`)
+////////////////////////////////SERVER
+app.listen(PORT, () => {
+  console.log(`Server running on Port:${PORT}`);
 });
