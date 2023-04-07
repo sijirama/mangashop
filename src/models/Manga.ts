@@ -19,6 +19,6 @@ export const MangaSchema = new mongoose.Schema<MangaType>({
 });
 
 
-const MangaModel = mongoose.model<MangaType>("Spell", MangaSchema);
+const MangaModel = mongoose.model<MangaType>("Manga", MangaSchema);
 
 export default MangaModel;
