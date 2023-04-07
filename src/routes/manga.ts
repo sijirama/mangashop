@@ -3,12 +3,12 @@ import * as mangaController from "../controllers/mangaController"
 const router = Express.Router();
 
 router.route('/')
-    .get(mangaController.getAllManga)
-    .post()
-    .put()
-    .delete()
+    .get(mangaController.GetAllManga)
+    .post(mangaController.AddManga)
+    .put(mangaController.UpdateManga)
+    .delete(mangaController.DeleteManga)
 
 router.route("/:id")
-    .get()
+    .get(mangaController.GetMangaByID)
 
 export { router as MangaRoute }
