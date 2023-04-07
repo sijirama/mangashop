@@ -16,8 +16,6 @@ const app = Express();
 dotenv.config();
 const PORT = process.env.PORT || 5173;
 
-console.log(process.env.DATABASE_URI)
-
 //MongoDB
 import { MongoClient } from "mongodb";
 const url = `mongodb://localhost:${PORT}`;
