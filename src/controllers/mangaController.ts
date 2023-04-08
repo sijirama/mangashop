@@ -30,7 +30,7 @@ function AddManga(request: Express.Request, response: Express.Response) {
     description: mangaData.description,
     edition: mangaData.edition,
     volume: Number(mangaData.volume),
-    genres: [mangaData.genres],
+    genres: mangaData.genres,
   };
 
   const newManga = new MangaModel(manga);
