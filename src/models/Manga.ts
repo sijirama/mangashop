@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-type MangaType = {
+export type MangaType = {
     name: string,
     description: string,
     author: string,
