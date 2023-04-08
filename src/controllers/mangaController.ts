@@ -1,20 +1,24 @@
 import * as Express from "express";
 import MangaModel, { MangaType } from "../models/Manga";
-import { SaveOptions } from "mongoose";
+import mongoose, { SaveOptions } from "mongoose";
+import { ObjectId } from "mongodb";
 
-async function GetAllManga(request: Express.Request, response: Express.Response) {
-        const allManga = await MangaModel.find({})  
-        if(allManga.length > 0){
-            return response.status(200).json({
-                success: true,
-                data: allManga
-            });
-        }else{
-            return response.status(200).json({
-                success:true,
-                description:"No Manga in the shop"
-            })
-        }
+async function GetAllManga(
+  request: Express.Request,
+  response: Express.Response
+) {
+  const allManga = await MangaModel.find({});
+  if (allManga.length > 0) {
+    return response.status(200).json({
+      success: true,
+      data: allManga,
+    });
+  } else {
+    return response.status(200).json({
+      success: true,
+      description: "No Manga in the shop",
+    });
+  }
 }
 
 function AddManga(request: Express.Request, response: Express.Response) {
@@ -53,9 +57,19 @@ function DeleteManga(request: Express.Request, response: Express.Response) {
   console.log("DELETE");
 }
 
-function GetMangaByID(request: Express.Request, response: Express.Response) {
+async function GetMangaByID( request: Express.Request, response: Express.Response
+) {
   const { id } = request.params;
   console.log(`GETID ${id}`);
+  const mangaById = await MangaModel.find({ _id: id }).exec();
+  if (mangaById) {
+    return response.status(200).json({
+      success: true,
+      data: mangaById,
+    });
+  }else{
+    return response.status(400).json({success: false, data:"No manga found"})
+  } 
 }
 
 export { GetAllManga, AddManga, UpdateManga, DeleteManga, GetMangaByID };

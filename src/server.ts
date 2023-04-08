@@ -30,6 +30,7 @@ app.use("/manga", MangaRoute);
 
 ////////////////////////////////SERVER
 Mongoose.connection.once("open", () => {
+  console.clear()
   console.log("Connected to MongoDB");
   app.listen(PORT, () => {
     console.log(`Server running on Port:${PORT}`);
