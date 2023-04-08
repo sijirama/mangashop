@@ -52,8 +52,21 @@ function UpdateManga(request: Express.Request, response: Express.Response) {
   console.log("PUT");
 }
 
-function DeleteManga(request: Express.Request, response: Express.Response) {
-  const {} = request.params;
+async function DeleteManga(request: Express.Request, response: Express.Response) {
+  const {id} = request.body;
+  const manga:any = await MangaModel.find({ _id: id }).exec();
+
+  if (manga){
+    try {
+      await MangaModel.deleteOne({_id: id})
+      return response.status(200).send({ success: true,response:`Successfully deleted ${manga.name}`})
+    } catch (error) {
+      return response.status(400).json({success: false, data:`Error deleting ${manga.name}`})
+    }
+  }else{
+    return response.status(400).json({success: false, data:"No manga found"})
+  }
+
   console.log("DELETE");
 }
 
