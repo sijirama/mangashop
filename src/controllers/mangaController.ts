@@ -47,9 +47,21 @@ function AddManga(request: Express.Request, response: Express.Response) {
   response.end();
 }
 
-function UpdateManga(request: Express.Request, response: Express.Response) {
-  const {} = request.params;
-  console.log("PUT");
+async function UpdateManga(request: Express.Request, response: Express.Response) {
+  const id = request.body.id;
+  const update = request.body.update;
+  if(validateObjectIsaMangaType(update)){
+    try {
+      update.volumes = Number(update.volumes)
+      await MangaModel.findByIdAndUpdate(id, update);
+      return response.status(200).send({ success: true, data:"Succesfully updated manga."});
+    } catch (error) {
+     return response.status(401).send({ success: false, error});
+    }
+  }else{
+    return response.status(401).send({ success: false, error: "Update fields are not accurate" });
+  }
+  console.log("PUT" , update);
 }
 
 async function DeleteManga(request: Express.Request, response: Express.Response) {
@@ -86,3 +98,13 @@ async function GetMangaByID( request: Express.Request, response: Express.Respons
 }
 
 export { GetAllManga, AddManga, UpdateManga, DeleteManga, GetMangaByID };
+
+function validateObjectIsaMangaType(object:{}):boolean{
+  const result = object.hasOwnProperty("name") 
+                  || object.hasOwnProperty("description") 
+                  || object.hasOwnProperty("author") 
+                  || object.hasOwnProperty("genres") 
+                  || object.hasOwnProperty("volumes") 
+                  || object.hasOwnProperty("edition")
+  return result
+}
