@@ -2,12 +2,19 @@ import * as Express from "express";
 import MangaModel, { MangaType } from "../models/Manga";
 import { SaveOptions } from "mongoose";
 
-function GetAllManga(request: Express.Request, response: Express.Response) {
-  console.log(request.method, request.url);
-  return response.status(200).json({
-    success: true,
-    data: "Thank you for trying to get the managa from our store",
-  });
+async function GetAllManga(request: Express.Request, response: Express.Response) {
+        const allManga = await MangaModel.find({})  
+        if(allManga.length > 0){
+            return response.status(200).json({
+                success: true,
+                data: allManga
+            });
+        }else{
+            return response.status(200).json({
+                success:true,
+                description:"No Manga in the shop"
+            })
+        }
 }
 
 function AddManga(request: Express.Request, response: Express.Response) {
