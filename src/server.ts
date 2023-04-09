@@ -9,6 +9,7 @@ connectDB();
 //Import Routes
 import { MangaRoute } from "./routes/manga";
 import { RootRoute } from "./routes/root";
+import {RegisterRoute} from "./routes/register"
 
 const app = Express();
 
@@ -27,6 +28,7 @@ app.use(Express.json()); // built-in middleware for json
 ////////////////////////////////ROUTES
 app.get("/", RootRoute);
 app.use("/manga", MangaRoute);
+app.use("/register", RegisterRoute);
 
 ////////////////////////////////SERVER
 Mongoose.connection.once("open", () => {
