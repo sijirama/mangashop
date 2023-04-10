@@ -1,9 +1,10 @@
 import  Express  from "express";
 import * as mangaController from "../controllers/mangaController"
 const router = Express.Router();
+import { verifyJWT } from "../middleware/verifyJWT";
 
 router.route('/')
-    .get(mangaController.GetAllManga)
+    .get(verifyJWT , mangaController.GetAllManga)
     .post(mangaController.AddManga)
     .put(mangaController.UpdateManga)
     .delete(mangaController.DeleteManga)

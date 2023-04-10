@@ -11,7 +11,7 @@ export const UserSchema = new mongoose.Schema<UserType>({
     email:{type:String, required:true},
     password:{type:String, required:true},
     phone:{type:Number , required:true},
-    refreshtoken:{type:String , default:""}
+    refreshtoken:{type:String , default:"default token"}
 })
 
 const UserModel = mongoose.model<UserType>("User" , UserSchema)
