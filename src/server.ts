@@ -2,6 +2,7 @@ import Express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser"
 import { verifyJWT } from "./middleware/verifyJWT";
+import credentialsMiddleware from "./middleware/credentials";
 
 //Mongoose
 import Mongoose from "mongoose";
@@ -28,6 +29,7 @@ const url = `mongodb://localhost:${PORT}`;
 
 //////////////////////////////MIDDLEWARE
 app.use(cookieParser())
+app.use(credentialsMiddleware)
 app.use(Express.urlencoded({ extended: false })); // built-in middleware to handle urlencoded form data
 app.use(Express.json()); // built-in middleware for json
 
