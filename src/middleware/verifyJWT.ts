@@ -11,8 +11,8 @@ const verifyJWT = (request:Express.Request | any , resposne:Express.Response , n
     console.log(token )
     jwt.verify(
         token,
-        process.env.ACCESS_TOKEN_SECRET!,
-        (err:any , decoded:any) => {
+        process.env.ACCESS_TOKEN_SECRET!, // lmao ts wants me to type guard with ifs 30 fucking times, hell no.
+        (err:any , decoded:any) => { // any for life.
             if (err) console.log(err.message)
             if (err) return resposne.sendStatus(403)
             request.email = decoded!.email

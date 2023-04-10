@@ -4,7 +4,7 @@ const router = Express.Router();
 import { verifyJWT } from "../middleware/verifyJWT";
 
 router.route('/')
-    .get(verifyJWT , mangaController.GetAllManga)
+    .get(mangaController.GetAllManga)
     .post(mangaController.AddManga)
     .put(mangaController.UpdateManga)
     .delete(mangaController.DeleteManga)

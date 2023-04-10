@@ -17,13 +17,13 @@ async function handleLogin (request:Express.Request , response:Express.Response)
         const accessToken = jwt.sign(
             {"email":email},
             process.env.ACCESS_TOKEN_SECRET!,
-            {expiresIn:150}  
+            {expiresIn:50}  
             )
             const refreshToken = jwt.sign(
                 {"email":email},
                 process.env.REFRESH_TOKEN_SECRET!,
                 {expiresIn:'1d'}  
-                )
+            )
                 
                 foundUser.refreshtoken =  refreshToken
                 await foundUser.save()
