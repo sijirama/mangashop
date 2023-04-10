@@ -13,6 +13,7 @@ import { MangaRoute } from "./routes/manga";
 import { RootRoute } from "./routes/root";
 import {RegisterRoute} from "./routes/register"
 import {LoginRoute} from "./routes/login"
+import {LogoutRoute} from "./routes/logout"
 import { RefreshTokenRoute } from "./routes/refreshtoken";
 
 const app = Express();
@@ -35,6 +36,7 @@ app.get("/", RootRoute);
 app.use("/register", RegisterRoute);
 app.use("/login", LoginRoute);
 app.use("/refresh" , RefreshTokenRoute)
+app.use("/logout", LogoutRoute);
 
 
 app.use(verifyJWT)
