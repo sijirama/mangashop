@@ -15,7 +15,7 @@ async function handleNewUser (request:Express.Request , response:Express.Respons
         const newUser:UserType = {
             email:email,
             password:hashedPassword,
-            phone:Number(phone)
+            phone:Number(phone),
         }
         const savedNewUser = new UserModel (newUser)
         console.log(savedNewUser)
